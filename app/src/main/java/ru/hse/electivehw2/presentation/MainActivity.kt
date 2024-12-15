@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val imageUrl = getString(R.string.fake_image_url)
+        val imageUrl = getString(R.string.example_image_url)
         val imageView: ImageFilterView = findViewById(R.id.imageFilterView)
         val errorTextView: TextView = findViewById(R.id.errorTextView)
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
