@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("io.gitlab.arturbosch.detekt") version "1.23.1"
 }
 
 android {
@@ -57,4 +58,13 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.contrib)
     androidTestImplementation(libs.androidx.rules)
     androidTestImplementation(libs.androidx.espresso.web)
+}
+
+detekt {
+    config.from("$rootDir/detekt.yml")
+    buildUponDefaultConfig = true
+}
+
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+    jvmTarget = "1.8"
 }

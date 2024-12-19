@@ -7,6 +7,7 @@ import coil.request.ErrorResult
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 import ru.hse.electivehw2.domain.ImageRepository
+import java.io.IOException
 
 class ImageRepositoryImpl(private val context: Context) : ImageRepository {
     override suspend fun loadImage(url: String): Result<Drawable> {
@@ -21,7 +22,9 @@ class ImageRepositoryImpl(private val context: Context) : ImageRepository {
             } else {
                 Result.failure((res as ErrorResult).throwable)
             }
-        } catch (e: Exception) {
+        } catch (e: IOException) {
+            Result.failure(e)
+        } catch (e: IllegalArgumentException) {
             Result.failure(e)
         }
     }
