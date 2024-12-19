@@ -1,0 +1,11 @@
+build:
+  maxIssues: 0
+  weights:
+    complexity: 2
+    LongParameterList: 1
+    style: 1
+  excludeCorrectable: true
+
+style:
+  MagicNumber:
+    active: true
