@@ -1,7 +1,6 @@
 package ru.hse.electivehw2.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val imageUrl = getString(R.string.example_image_url)
+        val imageUrl = getString(R.string.fake_image_url)
         val imageView: ImageFilterView = findViewById(R.id.imageFilterView)
         val errorTextView: TextView = findViewById(R.id.errorTextView)
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
@@ -31,13 +30,9 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.imageDrawable.observe(this) { drawable ->
             if (drawable != null) {
-                Log.d("MainActivity", "Image loaded")
-                imageView.visibility = ImageFilterView.VISIBLE
                 imageView.setImageDrawable(drawable)
                 progressBar.visibility = ProgressBar.GONE
-                errorTextView.visibility = TextView.GONE
             } else if (viewModel.errorMessage.value == null) {
-                Log.d("MainActivity", "Loading image")
                 progressBar.visibility = ProgressBar.VISIBLE
                 viewModel.loadImage(imageUrl, CoroutineScope(Dispatchers.IO))
             }
@@ -45,19 +40,13 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.errorMessage.observe(this) { errorMessage ->
             if (errorMessage != null) {
-                Log.d("MainActivity", "Error: $errorMessage")
                 errorTextView.text = errorMessage
-                errorTextView.visibility = TextView.VISIBLE
                 progressBar.visibility = ProgressBar.GONE
-                imageView.visibility = ImageFilterView.GONE
-            } else {
-                Log.d("MainActivity", "No error")
-                errorTextView.visibility = TextView.GONE
-                imageView.visibility = ImageFilterView.VISIBLE
             }
         }
 
         if (savedInstanceState == null) {
+            progressBar.visibility = ProgressBar.VISIBLE
             viewModel.loadImage(imageUrl, CoroutineScope(Dispatchers.IO))
         }
     }

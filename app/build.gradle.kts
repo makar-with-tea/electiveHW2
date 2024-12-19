@@ -47,17 +47,13 @@ dependencies {
     implementation(libs.coil.base)
 
     testImplementation(libs.junit)
-    testImplementation(libs.org.mockito.mockito.core3)
-    testImplementation(libs.kotlinx.coroutines.test)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.espresso.accessibility)
     androidTestImplementation(libs.androidx.uiautomator)
     androidTestImplementation(libs.play.services.mlkit.barcode.scanning)
-    androidTestImplementation(libs.androidx.espresso.contrib)
     androidTestImplementation(libs.androidx.rules)
-    androidTestImplementation(libs.androidx.espresso.web)
 }
 
 detekt {

@@ -1,7 +1,6 @@
 package ru.hse.electivehw2.presentation
 
 import android.graphics.drawable.Drawable
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,7 +19,6 @@ class MainViewModel(private val loadImageUseCase: LoadImageUseCase) : ViewModel(
         context.launch {
             val result = loadImageUseCase.execute(url)
             if (result.isFailure) {
-                Log.d("MainViewModel", "Error loading image", result.exceptionOrNull())
                 _errorMessage.postValue(result.exceptionOrNull()?.message ?: "Неизвестная ошибка")
                 return@launch
             }
